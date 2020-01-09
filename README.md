@@ -25,6 +25,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Project variables
 ```
+<SwipeablePoiCardDeck
+      :cards="visibleCards"
+      :width="180"
+      :height="350"
+      :margin="30"
+      :offset="12"
+      @cardAccepted="handleCardAccepted"
+    />
 width: Card Width
 header: Card Height
 offset: Card Height Offset
