@@ -1,4 +1,4 @@
-# swipeable
+# Vue Swipeable Card
 
 ## Project setup
 ```
@@ -22,3 +22,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Project variables
+```
+width: Card Width
+header: Card Height
+offset: Card Height Offset
+```

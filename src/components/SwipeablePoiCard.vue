@@ -10,8 +10,8 @@
     class="swipeable-card"
     :style="{
       transform: transformString,
-      width: this.width,
-      height: this.height
+      width: this.width + 'px',
+      height: this.height + 'px'
     }"
   >
     <h3 class="cardTitle">{{ card.name }}</h3>
@@ -43,13 +43,19 @@ export default {
       required: true
     },
     width: {
-      type: String
+      type: Number
     },
     height: {
-      type: String
+      type: Number
+    },
+    index: {
+      type: Number
     },
     margin: {
-      type: String
+      type: Number
+    },
+    offset: {
+      type: Number
     }
   },
 
@@ -82,11 +88,13 @@ export default {
           return resp;
         } else return null;
       }
-      return null;
+      return `translateY(${(this.index * this.height) / 30}px) scale(${1 - (this.index * 0.05)})`;
+      //return `translateY(${this.index * this.offset}px)`;
     }
   },
 
   mounted() {
+    document.documentElement.style.setProperty("--my-size", "15px");
     const element = this.$refs.interactElement;
 
     interact(element).draggable({

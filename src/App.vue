@@ -2,12 +2,13 @@
   <div id="app">
     <SwipeablePoiCardDeck
       :cards="visibleCards"
-      :width="'180px'"
-      :height="'250px'"
-      :margin="'10px'"
+      :width="180"
+      :height="350"
+      :margin="30"
+      :offset="12"
       @cardAccepted="handleCardAccepted"
     />
-    <p>Current Top Card: {{currentTopCard}}</p>
+    <p>Current Top Card: {{ currentTopCard }}</p>
   </div>
 </template>
 

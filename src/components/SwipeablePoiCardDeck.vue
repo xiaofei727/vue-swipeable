@@ -5,8 +5,10 @@
       :key="card.id"
       :card="card"
       :width="width"
-      :margin="margin"
       :height="height"
+      :margin="margin"
+      :offset="offset"
+      :index="index"
       :is-current="index === 0"
       @cardAccepted="$emit('cardAccepted', allCards[1])"
       @hideCard="moveCardToBack"
@@ -44,13 +46,16 @@ export default {
       required: true
     },
     width: {
-      type: String
+      type: Number
     },
     height: {
-      type: String
+      type: Number
     },
     margin: {
-      type: String
+      type: Number
+    },
+    offset: {
+      type: Number
     }
   }
 };
