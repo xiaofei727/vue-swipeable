@@ -4,8 +4,6 @@
       :cards="visibleCards"
       :width="180"
       :height="350"
-      :margin="30"
-      :offset="12"
       @cardAccepted="handleCardAccepted"
     />
     <p>Current Top Card: {{ currentTopCard }}</p>
@@ -39,15 +37,10 @@ export default {
 
   methods: {
     handleCardAccepted(card) {
-      //console.log("handleCardAccepted", card.name);
       this.currentTopCard = card.name;
     },
-    handleCardRejected() {
-      //console.log("handleCardRejected");
-    },
-    handleCardSkipped() {
-      //console.log("handleCardSkipped");
-    }
+    handleCardRejected() {},
+    handleCardSkipped() {}
   },
   mounted() {
     this.currentTopCard = this.visibleCards[0].name;

@@ -50,12 +50,6 @@ export default {
     },
     index: {
       type: Number
-    },
-    margin: {
-      type: Number
-    },
-    offset: {
-      type: Number
     }
   },
 
@@ -84,17 +78,14 @@ export default {
           if (!scale && !translateY)
             resp = `translate3D(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
           else resp = `translateX(0px) translateY(0px) scale(${scale})`;
-          //console.log(resp);
           return resp;
         } else return null;
       }
       return `translateY(${(this.index * this.height) / 30}px) scale(${1 - (this.index * 0.05)})`;
-      //return `translateY(${this.index * this.offset}px)`;
     }
   },
 
   mounted() {
-    document.documentElement.style.setProperty("--my-size", "15px");
     const element = this.$refs.interactElement;
 
     interact(element).draggable({
@@ -136,7 +127,6 @@ export default {
 
   methods: {
     resetCardToBack() {
-      //console.log("resetCardToBack");
       setTimeout(() => {
         setTimeout(this.resetCardPosition, 200);
         setTimeout(this.sendCardToBack, 700);
@@ -197,11 +187,9 @@ export default {
     },
 
     resetCardPosition() {
-      //console.log("resetCardPosition");
       this.interactSetPosition({ x: 0, y: 0, rotation: 0 });
     },
     sendCardToBack() {
-      //console.log("resetCardPosition");
       this.isInteractAnimating = true;
       this.isInteractDragged = false;
       this.resetCardPosition();

@@ -6,8 +6,6 @@
       :card="card"
       :width="width"
       :height="height"
-      :margin="margin"
-      :offset="offset"
       :index="index"
       :is-current="index === 0"
       @cardAccepted="$emit('cardAccepted', allCards[1])"
@@ -36,7 +34,6 @@ export default {
   },
   methods: {
     moveCardToBack() {
-      //console.log("moveCardToBack");
       this.allCards.push(this.allCards.shift());
     }
   },
@@ -49,12 +46,6 @@ export default {
       type: Number
     },
     height: {
-      type: Number
-    },
-    margin: {
-      type: Number
-    },
-    offset: {
       type: Number
     }
   }
