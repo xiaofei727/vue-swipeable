@@ -1,0 +1,90 @@
+$cardsTotal: 100;
+$maxCardsInStack: 10;
+$cardsPositionOffset: 12px;
+$cardsScaleOffset: 0.08;
+$defaultTranslation: $cardsPositionOffset * $cardsTotal;
+$defaultScale: 1 - ($cardsScaleOffset * $cardsTotal);
+$fs-card-title: 1.125em;
+
+/* Typography & Colors */
+$fs-h2: rem(24px);
+$fw-bold: 700;
+$c-white: #fff;
+$c-black: #000;
+$c-red-50: #73345e;
+$c-red-25: #432958;
+$c-navy: #0f0e3d;
+$c-text: #8285a7;
+$primary-gradient-start: #d94e47;
+$primary-gradient-end: #df1165;
+
+.swipeable-cards {
+  position: relative;
+  display: flex;
+}
+
+.swipeable-card {
+  @include card();
+  @include absolute(0);
+  @include sizing(100% 80vw);
+  @include flex-center();
+
+  display: flex;
+  margin: auto;
+  font-size: $fs-h2;
+  font-weight: $fw-bold;
+  color: $c-white;
+  background-image: linear-gradient(
+    -180deg,
+    $primary-gradient-start 2%,
+    $primary-gradient-end 100%
+  );
+  opacity: 0;
+  transform: translateY($defaultTranslation) scale($defaultScale);
+  transform-origin: 50%, 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  pointer-events: none;
+  will-change: transform, opacity;
+
+  $translation: $cardsPositionOffset * ($cardsTotal - 1);
+  $scale: 1 - ($cardsScaleOffset * ($cardsTotal - 1));
+
+  &.isCurrent {
+    pointer-events: auto;
+  }
+
+  &.isAnimating {
+    transition: transform 0.7s $ease-out-back;
+  }
+}
+
+@for $i from 1 through $cardsTotal {
+  $index: $i - 1;
+  $translation: $cardsPositionOffset * $index;
+  $scale: 1 - ($cardsScaleOffset * $index);
+  $overalyAlpha: 0.025;
+  @if $i > 1 {
+    $alphaIncrease: 1 * $i;
+    $overalyAlpha: 0.025 * (1 + $alphaIncrease);
+  }
+  .swipeable-card:nth-child(#{$i}) {
+    z-index: $cardsTotal - $index;
+    opacity: 1;
+    transform: translateY($translation) scale($scale);
+
+    @if $i > 1 {
+      @include after() {
+        content: " ";
+        display: block;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, $overalyAlpha);
+        border-radius: 15px;
+      }
+    }
+  }
+}
